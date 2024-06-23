@@ -34,6 +34,8 @@ public class VehicleEntity {
     @Column(name = "num_asientos")
     Integer num_asientos;
 
+    private Integer vehicleRepairId;
+
     @Override
     public String toString() {
         return "VehicleEntity{" +
