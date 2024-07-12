@@ -1,6 +1,7 @@
 package autofix.ms_vehicle.controller;
 
 import autofix.ms_vehicle.entity.VehicleEntity;
+import autofix.ms_vehicle.model.RepairEntity;
 import autofix.ms_vehicle.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,16 +15,6 @@ public class VehicleController {
 
     @Autowired
     VehicleService vehicleService;
-
-    @GetMapping("/hello")
-    public String sayHello() {
-        return "Hola";
-    }
-
-    @GetMapping("/bye")
-    public String sayBye() {
-        return "Bye";
-    }
 
     @GetMapping("/")
     public ResponseEntity<List<VehicleEntity>> getAll(){
@@ -47,6 +38,17 @@ public class VehicleController {
         System.out.println("Recibido VehicleEntity: " + vehicle.toString());
         return ResponseEntity.ok(newVehicle);
     }
+
+
+    @GetMapping("/byRepair/{vehicleId}")
+    public ResponseEntity<List<RepairEntity>> getVehicleByRepairId(@PathVariable("vehicleId") int vehicleId) {
+        List<RepairEntity> repairs = vehicleService.getRepairsByVehicleId(vehicleId);
+        if (repairs == null || repairs.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(repairs);
+    }
+
 
 
 
