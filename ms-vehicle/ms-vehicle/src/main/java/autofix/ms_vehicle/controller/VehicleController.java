@@ -1,7 +1,7 @@
 package autofix.ms_vehicle.controller;
 
 import autofix.ms_vehicle.entity.VehicleEntity;
-import autofix.ms_vehicle.model.RepairEntity;
+//import autofix.ms_vehicle.model.RepairEntity;
 import autofix.ms_vehicle.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/vehicles")
 public class VehicleController {
 
@@ -32,6 +33,14 @@ public class VehicleController {
         return ResponseEntity.ok(vehicle);
     }
 
+    @GetMapping("/{patente}")
+    public ResponseEntity<VehicleEntity> getByPatente(@PathVariable("patente") String patente){
+        VehicleEntity vehicle = vehicleService.getVehicleByPatente(patente);
+        if(vehicle == null)
+            return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(vehicle);
+    }
+
     @PostMapping("/")
     public ResponseEntity<VehicleEntity> save(@RequestBody VehicleEntity vehicle){
         VehicleEntity newVehicle = vehicleService.save(vehicle);
@@ -40,14 +49,14 @@ public class VehicleController {
     }
 
 
-    @GetMapping("/byRepair/{vehicleId}")
-    public ResponseEntity<List<RepairEntity>> getVehicleByRepairId(@PathVariable("vehicleId") int vehicleId) {
-        List<RepairEntity> repairs = vehicleService.getRepairsByVehicleId(vehicleId);
-        if (repairs == null || repairs.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(repairs);
-    }
+//    @GetMapping("/byRepair/{vehicleId}")
+//    public ResponseEntity<List<RepairEntity>> getVehicleByRepairId(@PathVariable("vehicleId") int vehicleId) {
+//        List<RepairEntity> repairs = vehicleService.getRepairsByVehicleId(vehicleId);
+//        if (repairs == null || repairs.isEmpty()) {
+//            return ResponseEntity.notFound().build();
+//        }
+//        return ResponseEntity.ok(repairs);
+//    }
 
 
 

@@ -1,9 +1,6 @@
 package autofix.ms_vehicle.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,6 +13,8 @@ public class VehicleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column(name = "patente", unique = true, nullable = false)
     private String patente;
     private String marca;
     private String modelo;
@@ -23,5 +22,6 @@ public class VehicleEntity {
     private Integer ano_fabricacion;
     private String tipo_motor;
     private Integer num_asientos;
+    private Integer kilometraje;
 
 }
