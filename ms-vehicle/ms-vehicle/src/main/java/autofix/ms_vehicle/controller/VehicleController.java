@@ -33,7 +33,7 @@ public class VehicleController {
         return ResponseEntity.ok(vehicle);
     }
 
-    @GetMapping("/{patente}")
+    @GetMapping("/patente/{patente}")
     public ResponseEntity<VehicleEntity> getByPatente(@PathVariable("patente") String patente){
         VehicleEntity vehicle = vehicleService.getVehicleByPatente(patente);
         if(vehicle == null)
