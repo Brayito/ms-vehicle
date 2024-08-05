@@ -35,6 +35,18 @@ public class VehicleService {
     }
 
 
+    public VehicleEntity actualizarEstado(String patente, VehicleEntity vehicleUpdated) {
+        System.out.println("Actualizar estado VehicleService");
+        VehicleEntity vehicle = vehicleRepository.findOneByPatente(patente);
+        if (vehicle == null) {
+            return null;
+        }
+        vehicle.setEstado(vehicleUpdated.getEstado());
+        return vehicleRepository.save(vehicle);
+    }
+
+
+
 //    public List<RepairEntity> getRepairsByVehicleId(int vehicleId){
 //        try{
 //            List<RepairEntity> repairs = restTemplate.getForObject("http://ms-repairs/repairs/byVehicle/" + vehicleId, List.class);

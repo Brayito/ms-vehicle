@@ -48,6 +48,18 @@ public class VehicleController {
         return ResponseEntity.ok(newVehicle);
     }
 
+    @PutMapping("/actualizarEstado/{patente}")
+    public ResponseEntity<VehicleEntity> actualizarEstado(@PathVariable("patente") String patente, @RequestBody VehicleEntity vehicleUpdated) {
+        System.out.println("Actualizar estado VehicleController");
+        VehicleEntity updatedVehicle = vehicleService.actualizarEstado(patente, vehicleUpdated);
+        if (updatedVehicle == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(updatedVehicle);
+    }
+
+
+
 
 //    @GetMapping("/byRepair/{vehicleId}")
 //    public ResponseEntity<List<RepairEntity>> getVehicleByRepairId(@PathVariable("vehicleId") int vehicleId) {
